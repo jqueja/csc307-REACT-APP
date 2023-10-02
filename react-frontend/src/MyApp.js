@@ -14,8 +14,8 @@ import Form from './Form';
     }
 
     function updateList(person) {
-      setCharacters([...characters, person]);
-    }
+  setCharacters([...characters, person]);
+  }
       
     return (
       <div className="container">
