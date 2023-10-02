@@ -21,7 +21,7 @@ import Form from './Form';
       <div className="container">
         <Table characterData={characters} 
           removeCharacter={removeOneCharacter} />
-        <Form />
+        <Form handleSubmit={updateList}/>
       </div>
     )
   }
