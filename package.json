@@ -1,20 +1,45 @@
 {
   
   "name": "csc307-react-app",
+  
   "version": "1.0.0",
+  
   "description": "",
+  
   "main": "index.js",
   
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd react-frontend && npm start"
+  
+    
+  "test": "echo \"Error: no test specified\" && exit 1",
+  
+    
+  "start": "cd react-frontend && npm start"
+  
   },
+  
   "author": "",
+  
   "license": "ISC",
+  
   "dependencies": {
-    "create-react-app": "^5.0.1"
+  
+    
+  "create-react-app": "^5.0.1"
+  
   },
+  
   "workspaces": [
-    "packages/*"
-  ]
+  
+    
+  "packages/*"
+  
+  ],
+  
+  "devDependencies": {
+  
+    
+  "nodemon": "^3.0.1"
+  
+  }
 }
