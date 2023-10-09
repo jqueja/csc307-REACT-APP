@@ -121,7 +121,7 @@ app.delete('/users/:id', (req, res) => {
 
 
    if (success) {
-       res.send('User deleted')
+    res.status(204).send('User Deleted');
    } else {
       res.status(404).send('User not Found')
    }
