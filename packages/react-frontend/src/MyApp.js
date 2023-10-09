@@ -47,7 +47,11 @@ function updateList(person) {
   postUser(userWithId)
     .then((response) => {
       if (response.status === 201) {
-        return response.json();
+
+        if(response.ok) {
+          return response.json() 
+        }
+        
       } else {
         throw new Error('Failed to insert user')
       }

@@ -129,6 +129,14 @@ app.delete('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
    const userToAdd = req.body;
-   addUser(userToAdd);
-   res.status(201).send('Resource created Successfully')
+   const addedUser = addUser(userToAdd);
+
+
+    const responseJson = {
+        id: addedUser.id,
+        user: addedUser,
+        message: 'Resource created!'
+    }
+
+   res.status(201).send(responseJson)
 });
