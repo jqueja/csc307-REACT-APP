@@ -13,9 +13,6 @@ import Form from './Form';
       setCharacters(updated);
     }
 
-    function updateList(person) {
-  setCharacters([...characters, person]);
-  }
 
   function fetchUsers() {
     const promise = fetch("http://localhost:8000/users");
@@ -36,9 +33,16 @@ function postUser(person) {
 
 function updateList(person) { 
   postUser(person)
-    .then(() => setCharacters([...characters, person]))
+    .then((response) => {
+      if (response.status === 201) {
+        return response.json();
+      } else {
+        throw new Error('Failed to insert user')
+      }
+    })
+    .then((json) => setCharacters([...characters, json]))
     .catch((error) => {
-      console.log(error);
+      console.log(error)
     })
 }
 
