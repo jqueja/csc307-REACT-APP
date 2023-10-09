@@ -6,12 +6,34 @@ import Form from './Form';
   function MyApp() {
     const [characters, setCharacters] = useState([]); 
 
-      function removeOneCharacter (index) {
-        const updated = characters.filter((character, i) => {
-            return i !== index
+
+    function deleteUser(user) {
+      const { id } = user;
+    
+      fetch(`http://localhost:8000/users/${id}`, {
+        method: 'DELETE',
+      })
+        .then((response) => {
+          if (response.status === 204) {
+            console.log(`User with ID ${id} deleted successfully.`);
+          } else if (response.status === 404) {
+            console.log(`User with ID ${id} not found.`);
+          } else {
+            console.log(`Failed to delete user with ID ${id}.`);
+          }
+        })
+        .catch((error) => {
+          console.error('Error deleting user:', error);
         });
-      setCharacters(updated);
     }
+
+    function removeOneCharacter (index) {
+      const updated = characters.filter((character, i) => {
+          return i !== index
+      });
+      deleteUser(characters[index])
+      setCharacters(updated);
+  }
 
 
   function fetchUsers() {
@@ -36,30 +58,29 @@ function postUser(person) {
 }
 
 function updateList(person) {
-  
-    const randomId = generateRandomId();
-
-    const userWithId = {
-      id: randomId,
-      ...person,
-    }
+  const randomId = generateRandomId();
+  const userWithId = {
+    id: randomId,
+    ...person,
+  };
 
   postUser(userWithId)
     .then((response) => {
       if (response.status === 201) {
-
-        if(response.ok) {
-          return response.json() 
+        if (response.ok) {
+          return response.json();
         }
-        
       } else {
-        throw new Error('Failed to insert user')
+        throw new Error('Failed to insert user');
       }
     })
-    .then((json) => setCharacters([...characters, json]))
-    .catch((error) => {
-      console.log(error)
+    .then((json) => {
+      setCharacters([...characters, json]);
+      window.location.reload(); // Reload the page after successful submission
     })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 useEffect(() => {
