@@ -19,6 +19,10 @@ import Form from './Form';
     return promise;
 }
 
+  function generateRandomId() {
+    return Math.floor(Math.random() * 50 + 1);
+  }
+
 function postUser(person) {
   const promise = fetch("Http://localhost:8000/users", {
     method: "POST",
@@ -31,8 +35,16 @@ function postUser(person) {
   return promise;
 }
 
-function updateList(person) { 
-  postUser(person)
+function updateList(person) {
+  
+    const randomId = generateRandomId();
+
+    const userWithId = {
+      id: randomId,
+      ...person,
+    }
+
+  postUser(userWithId)
     .then((response) => {
       if (response.status === 201) {
         return response.json();
